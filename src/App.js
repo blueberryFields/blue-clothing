@@ -24,9 +24,9 @@ const App = () => {
             },
           });
         });
+      } else {
+        setState({ currentUser: userAuth });
       }
-
-      setState({ currentUser: userAuth });
 
       return function unsubscribe() {
         unsubscribeFromAuth();
