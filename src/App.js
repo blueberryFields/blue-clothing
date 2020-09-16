@@ -8,22 +8,35 @@ import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
-
 const App = () => {
   const [state, setState] = useState({ currentUser: null });
 
   useEffect(() => {
-    let unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      // setState({ currentUser: user });
-      createUserProfileDocument(user);
+    let unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
-      console.log(user);
+        userRef.onSnapshot((snapshot) => {
+          setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data(),
+            },
+          });
+        });
+      }
+
+      setState({ currentUser: userAuth });
 
       return function unsubscribe() {
         unsubscribeFromAuth();
       };
     });
   }, []);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   return (
     <div>
