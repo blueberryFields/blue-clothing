@@ -24,6 +24,8 @@ const App = () => {
             },
           });
         });
+        // not 100% sure if this 'else' is correct,
+        // they dont do it in the course
       } else {
         setState({ currentUser: userAuth });
       }

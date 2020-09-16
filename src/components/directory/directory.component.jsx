@@ -5,7 +5,7 @@ import "./directory.styles.scss";
 
 const Directory = () => {
   
-  const [state, setState] = useState({
+  const [state] = useState({
     sections: [
       {
         title: "hats",
