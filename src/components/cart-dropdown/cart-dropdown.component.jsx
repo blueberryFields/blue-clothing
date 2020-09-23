@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import CustomButton from '../custom-button/custom-button.component';
 import CartItem from '../cart-item/cart-item.component';
@@ -7,7 +7,9 @@ import { selectCartItems } from '../../redux/cart/cart.selectors';
 
 import './cart-dropdown.styles.scss';
 
-const CartDropDown = ({ cartItems }) => {
+const CartDropDown = (props) => {
+  const cartItems = useSelector(selectCartItems);
+
   return (
     <div className="cart-dropdown">
       <div className="cart-items">
@@ -20,8 +22,4 @@ const CartDropDown = ({ cartItems }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  cartItems: selectCartItems(state),
-});
-
-export default connect(mapStateToProps)(CartDropDown);
+export default CartDropDown;

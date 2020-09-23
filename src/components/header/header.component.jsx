@@ -1,16 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { auth } from "../../firebase/firebase.utils";
+import { auth } from '../../firebase/firebase.utils';
 
-import { ReactComponent as Logo } from "../../assets/blueberry.svg";
-import CartIcon from "../cart-icon/cart-icon.component";
-import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import { ReactComponent as Logo } from '../../assets/blueberry.svg';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
-import "./header.styles.scss";
+import './header.styles.scss';
 
-const Header = ({ currentUser, hidden }) => {
+const Header = (props) => {
+  const currentUser = useSelector(selectCurrentUser);
+  const hidden = useSelector(selectCartHidden);
+
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -40,9 +45,4 @@ const Header = ({ currentUser, hidden }) => {
   );
 };
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;
