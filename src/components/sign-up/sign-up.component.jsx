@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import FormInput from "../form-input/form-input.component";
-import CustomButton from "../custom-button/custom-button.component";
+import FormInput from '../form-input/form-input.component';
+import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
-import "./sign-up.styles.scss";
+import { SignUpContainer } from './sign-up.styles';
 
 const SignUp = () => {
   const [state, setState] = useState({
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const { displayName, email, password, confirmPassword } = state;
@@ -21,7 +21,7 @@ const SignUp = () => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords dont match");
+      alert('Passwords dont match');
       return;
     }
 
@@ -34,10 +34,10 @@ const SignUp = () => {
       createUserProfileDocument(user, { displayName });
 
       setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
       });
     } catch (error) {
       console.error(error);
@@ -51,7 +51,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-up">
+    <SignUpContainer>
       <h2 className="title">I do not have an account</h2>
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
@@ -89,7 +89,7 @@ const SignUp = () => {
         />
         <CustomButton type="submit">SIGN UP</CustomButton>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 

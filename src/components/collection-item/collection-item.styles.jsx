@@ -28,7 +28,7 @@ export const Image = styled.div`
   background-position: center;
   margin-bottom: 5px;
 
-  backgroundimage: ${({ imageUrl }) => `url(${imageUrl})`};
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
 
 export const AddButton = styled(CustomButton)`
