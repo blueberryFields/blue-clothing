@@ -39,7 +39,7 @@ const Header = (props) => {
         )}
         <CartIcon />
       </OptionsContainer>
-      {/* {!hidden && <CartDropdown />} */}
+      {!hidden && <CartDropdown />}
     </HeaderContainer>
   );
 };
