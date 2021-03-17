@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const buttonsStyles = css`
+const buttonStyles = css`
   background-color: black;
   color: white;
   border: none;
@@ -40,7 +40,7 @@ const getButtonStyles = (props) => {
     return googleSignInStyles;
   }
 
-  return props.inverted ? invertedButtonStyles : buttonsStyles;
+  return props.inverted ? invertedButtonStyles : buttonStyles;
 };
 
 export const CustomButtonContainer = styled.button`

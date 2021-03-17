@@ -17,11 +17,7 @@ const CollectionItem = ({ item }) => {
 
   return (
     <CollectionItemContainer>
-      <Image className="image"
-        style={{
-          backgroundImage: `url(${imageUrl})`,
-        }}
-      ></Image>
+      <Image className="image" imageUrl={imageUrl}></Image>
       <CollectionFooter>
         <Name>{name}</Name>
         <Price>{price}</Price>
