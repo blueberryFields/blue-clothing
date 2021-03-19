@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-
-import { auth } from '../../firebase/firebase.utils';
+import { useSelector, useDispatch } from 'react-redux';
 
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { signOutStart } from '../../redux/user/user.actions';
 
 import {
   HeaderContainer,
@@ -18,6 +17,7 @@ import {
 } from './header.styles';
 
 const Header = (props) => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const hidden = useSelector(selectCartHidden);
 
@@ -31,7 +31,7 @@ const Header = (props) => {
         <OptionLink to="/shop">SHOP</OptionLink>
         <OptionLink to="">CONTACT</OptionLink>
         {currentUser ? (
-          <OptionLink as="div" onClick={() => auth.signOut()}>
+          <OptionLink as="div" onClick={() => dispatch(signOutStart())}>
             SIGN OUT
           </OptionLink>
         ) : (

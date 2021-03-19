@@ -5,14 +5,16 @@ import { useDispatch } from 'react-redux';
 import FormInput from '../../components/form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth } from '../../firebase/firebase.utils';
-import { googleSigninStart } from '../../redux/user/user.actions';
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from '../../redux/user/user.actions';
 
 import { Buttons, SignInContainer } from './sign-in.styles';
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState({
+  const [emailAandPassword, setEmailAndPassword] = useState({
     email: '',
     password: '',
   });
@@ -20,23 +22,13 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { email, password } = state;
-
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      setState({
-        email: '',
-        password: '',
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(emailSignInStart(emailAandPassword));
   };
 
   const handleChange = (event) => {
     const { value, name } = event.target;
 
-    setState({ ...state, [name]: value });
+    setEmailAndPassword({ ...emailAandPassword, [name]: value });
   };
 
   return (
@@ -48,7 +40,7 @@ const SignIn = () => {
         <FormInput
           name="email"
           type="email"
-          value={state.email}
+          value={emailAandPassword.email}
           handleChange={handleChange}
           label="Email"
           required
@@ -56,7 +48,7 @@ const SignIn = () => {
         <FormInput
           name="password"
           type="password"
-          value={state.password}
+          value={emailAandPassword.password}
           handleChange={handleChange}
           label="Password"
           required
@@ -65,7 +57,7 @@ const SignIn = () => {
           <CustomButton type="submit">Sign In</CustomButton>
           <CustomButton
             type="button"
-            onClick={() => dispatch(googleSigninStart())}
+            onClick={() => dispatch(googleSignInStart())}
             isGoogleSignIn
           >
             Sign In with Google
