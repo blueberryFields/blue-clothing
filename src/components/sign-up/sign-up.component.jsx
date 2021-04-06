@@ -10,14 +10,14 @@ import { SignUpContainer } from './sign-up.styles';
 const SignUp = () => {
   const dispatch = useDispatch();
 
-  const [state, setState] = useState({
+  const [userCredentials, setUserCredentials] = useState({
     displayName: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
 
-  const { displayName, email, password, confirmPassword } = state;
+  const { displayName, email, password, confirmPassword } = userCredentials;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ const SignUp = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setState({ ...state, [name]: value });
+    setUserCredentials({ ...userCredentials, [name]: value });
   };
 
   return (

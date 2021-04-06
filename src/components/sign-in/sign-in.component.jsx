@@ -14,10 +14,13 @@ import { Buttons, SignInContainer } from './sign-in.styles';
 
 const SignIn = () => {
   const dispatch = useDispatch();
+
   const [emailAandPassword, setEmailAndPassword] = useState({
     email: '',
     password: '',
   });
+
+  const { email, password } = emailAandPassword;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,7 +43,7 @@ const SignIn = () => {
         <FormInput
           name="email"
           type="email"
-          value={emailAandPassword.email}
+          value={email}
           handleChange={handleChange}
           label="Email"
           required
@@ -48,7 +51,7 @@ const SignIn = () => {
         <FormInput
           name="password"
           type="password"
-          value={emailAandPassword.password}
+          value={password}
           handleChange={handleChange}
           label="Password"
           required
